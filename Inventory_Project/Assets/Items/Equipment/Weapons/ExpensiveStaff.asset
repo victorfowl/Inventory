@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6267105c4ee7584a8807312620b12a3, type: 3}
+  m_Name: ExpensiveStaff
+  m_EditorClassIdentifier: 
+  ItemName: 
+  ItemWeight: 3
+  MakeTrash:
+    m_PersistentCalls:
+      m_Calls: []
+  durability: 10000
+  Description: Not only it's expensive it also use gems to work.
+  ItemImage: {fileID: 21300000, guid: db427fab3e94daf4caa704d9314a77a1, type: 3}
+  Value: 5000
+  typeOfEquipable: 0
+  PrefabMesh: {fileID: 139086, guid: c022f1fb1d1c9ed43968cee781855787, type: 3}
+  Ammunition: {fileID: 11400000, guid: 0c66552b8e8e098438032ee3346cd61f, type: 2}
