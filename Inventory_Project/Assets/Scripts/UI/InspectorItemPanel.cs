@@ -14,9 +14,6 @@ public class InspectorItemPanel : MonoBehaviour
     Item itemToInspect;
 
     public void SetItemToInspect(Item item) {
-        if (itemToInspect == item)
-            return;
-
         RestartValues();
 
         itemToInspect = item;
@@ -37,6 +34,14 @@ public class InspectorItemPanel : MonoBehaviour
         {
             DurabilityText.gameObject.SetActive(false);
             DurabilityTitleText.gameObject.SetActive(false);
+        }
+    }
+
+    public void SetItemDurability(Item item, int durability)
+    {
+        if (item == itemToInspect)
+        {
+            DurabilityText.text = durability.ToString();
         }
     }
 

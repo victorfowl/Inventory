@@ -57,14 +57,10 @@ public class Inventory
     public List<Item> FilterItems(Type type, Equipment.TypeOfEquipable typeOfEquip)
     {
         List<Item> filteredItems = new List<Item>();
-        if (type == typeof(Equipment) || type == typeof(ActiveEquipment))
+        foreach (Item item in itemsList)
         {
-            filteredItems.Clear();
-            foreach (Item item in itemsList)
-            {
-                if (item.GetType() == type && ((Equipment)item).typeOfEquipable == typeOfEquip)
-                    filteredItems.Add(item);
-            }
+            if (item is Equipment && ((Equipment)item).typeOfEquipable == typeOfEquip)
+                filteredItems.Add(item);
         }
         return filteredItems;
     }
