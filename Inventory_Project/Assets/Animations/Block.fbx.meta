@@ -24,7 +24,7 @@ ModelImporter:
       to improve retargeting quality.\n\t'Spine_03' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
-    animationDoRetargetingWarnings: 1
+    animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
     animationCompression: 1

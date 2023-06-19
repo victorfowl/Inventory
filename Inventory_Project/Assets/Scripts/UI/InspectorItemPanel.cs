@@ -45,6 +45,14 @@ public class InspectorItemPanel : MonoBehaviour
         }
     }
 
+    public void SetItemValue(Item item, float value)
+    {
+        if (item == itemToInspect)
+        {
+            ValueText.text = Mathf.Round(value).ToString();
+        }
+    }
+
     void RestartValues()
     {
         ItemImage.sprite = null;

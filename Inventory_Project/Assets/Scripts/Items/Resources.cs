@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Resource", menuName = "Inventory/Resource", order = 1)]
@@ -12,8 +11,10 @@ public class Resources : Deteriorables, ISalable<float>
 
     float devaluableStep = 0;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        DeterioredItemEvent.AddListener(() => FindObjectOfType<InspectorItemPanel>(true).SetItemValue(this, Value));
         devaluableStep = Value / Durability;
     }
 
