@@ -20,8 +20,8 @@ public class Resources : Deteriorables, ISalable<float>
 
     public void Sell(float value)
     {
-        CharacterManager.inventory.TotalMoney += Mathf.Round(value);
-        CharacterManager.inventory.RemoveFromInventory(this);
+        CharacterManager.Instance.inventory.TotalMoney += Mathf.Round(value);
+        CharacterManager.Instance.inventory.RemoveFromInventory(this);
     }
 
     public override IEnumerator Deteriorate()

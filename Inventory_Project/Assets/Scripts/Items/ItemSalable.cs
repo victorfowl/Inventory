@@ -9,7 +9,7 @@ public class ItemSalable : Item, ISalable<float>
 
     public void Sell(float value)
     {
-        CharacterManager.inventory.TotalMoney += value;
-        CharacterManager.inventory.RemoveFromInventory(this);
+        CharacterManager.Instance.inventory.TotalMoney += value;
+        CharacterManager.Instance.inventory.RemoveFromInventory(this);
     }
 }

@@ -72,6 +72,6 @@ public class ItemPanel : Image, IPointerDownHandler
         else
             sellButton.interactable = false;
 
-        deleteButton.onClick.AddListener(() => CharacterManager.inventory.RemoveFromInventory(item));
+        deleteButton.onClick.AddListener(() => CharacterManager.Instance.inventory.RemoveFromInventory(item));
     }
 }

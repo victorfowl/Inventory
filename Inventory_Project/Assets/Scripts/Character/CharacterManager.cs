@@ -23,7 +23,8 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public static Inventory inventory;
+    public Inventory inventory;
+
     ActiveEquipment[] Weapons = new ActiveEquipment[2];
     Equipment[] Rings = new Equipment[2];
     Equipment Necklace;

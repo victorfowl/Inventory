@@ -19,7 +19,7 @@ public class ActiveEquipment : Equipment, IUsable
             Durability -= 10;
         else
         {
-            foreach (Item resource in CharacterManager.inventory.GetItems())
+            foreach (Item resource in CharacterManager.Instance.inventory.GetItems())
             {
                 if (resource.name == Ammunition.name)
                 {

@@ -18,13 +18,13 @@ public class InventoryCanvas : MonoBehaviour
 
     private void OnEnable()
     {
-        actualItems = CharacterManager.inventory.GetItems();
-        CharacterManager.inventory.ItemAdded.AddListener(() => SetItemsList(actualFilter));
-        CharacterManager.inventory.ItemAdded.AddListener(UpdateMoneyAndWeight);
+        actualItems = CharacterManager.Instance.inventory.GetItems();
+        CharacterManager.Instance.inventory.ItemAdded.AddListener(() => SetItemsList(actualFilter));
+        CharacterManager.Instance.inventory.ItemAdded.AddListener(UpdateMoneyAndWeight);
 
-        CharacterManager.inventory.ItemRemoved.AddListener(_ => GenerateItemButtons(actualItems));
-        CharacterManager.inventory.ItemRemoved.AddListener(_ => UpdateMoneyAndWeight());
-        CharacterManager.inventory.ItemRemoved.AddListener(RemoveFromCanvasInventory);
+        CharacterManager.Instance.inventory.ItemRemoved.AddListener(_ => GenerateItemButtons(actualItems));
+        CharacterManager.Instance.inventory.ItemRemoved.AddListener(_ => UpdateMoneyAndWeight());
+        CharacterManager.Instance.inventory.ItemRemoved.AddListener(RemoveFromCanvasInventory);
 
         UpdateMoneyAndWeight();
     }
@@ -44,28 +44,28 @@ public class InventoryCanvas : MonoBehaviour
         switch (filter)
         {
             case ButtonFilters.Filters.None:
-                actualItems.AddRange(CharacterManager.inventory.GetItems());
+                actualItems.AddRange(CharacterManager.Instance.inventory.GetItems());
                 break;
             case ButtonFilters.Filters.Weapons:
-                actualItems = CharacterManager.inventory.FilterItems(typeof(ActiveEquipment), Equipment.TypeOfEquipable.Weapon);
+                actualItems = CharacterManager.Instance.inventory.FilterItems(typeof(ActiveEquipment), Equipment.TypeOfEquipable.Weapon);
                 break;
             case ButtonFilters.Filters.Armour:
-                actualItems = CharacterManager.inventory.FilterItems(typeof(Equipment), Equipment.TypeOfEquipable.Armour);
-                actualItems.AddRange(CharacterManager.inventory.FilterItems(typeof(ActiveEquipment), Equipment.TypeOfEquipable.Shield));
+                actualItems = CharacterManager.Instance.inventory.FilterItems(typeof(Equipment), Equipment.TypeOfEquipable.Armour);
+                actualItems.AddRange(CharacterManager.Instance.inventory.FilterItems(typeof(ActiveEquipment), Equipment.TypeOfEquipable.Shield));
                 break;
             case ButtonFilters.Filters.Accesories:
-                actualItems = CharacterManager.inventory.FilterItems(typeof(Equipment), Equipment.TypeOfEquipable.Ring);
-                actualItems.AddRange(CharacterManager.inventory.FilterItems(typeof(Equipment), Equipment.TypeOfEquipable.Necklace));
+                actualItems = CharacterManager.Instance.inventory.FilterItems(typeof(Equipment), Equipment.TypeOfEquipable.Ring);
+                actualItems.AddRange(CharacterManager.Instance.inventory.FilterItems(typeof(Equipment), Equipment.TypeOfEquipable.Necklace));
                 break;
             case ButtonFilters.Filters.Consumables:
-                actualItems = CharacterManager.inventory.FilterItems(typeof(Consumables));
-                actualItems.AddRange(CharacterManager.inventory.FilterItems(typeof(Potions)));
+                actualItems = CharacterManager.Instance.inventory.FilterItems(typeof(Consumables));
+                actualItems.AddRange(CharacterManager.Instance.inventory.FilterItems(typeof(Potions)));
                 break;
             case ButtonFilters.Filters.Resources:
-                actualItems = CharacterManager.inventory.FilterItems(typeof(Resources));
+                actualItems = CharacterManager.Instance.inventory.FilterItems(typeof(Resources));
                 break;
             case ButtonFilters.Filters.Trash:
-                actualItems = CharacterManager.inventory.FilterItems(typeof(Item));
+                actualItems = CharacterManager.Instance.inventory.FilterItems(typeof(Item));
                 break;
             default:
                 break;
@@ -81,18 +81,21 @@ public class InventoryCanvas : MonoBehaviour
 
         for (int i = 1; i < itemScroll.childCount - 1; i++)
         {
+            GameObject child = itemScroll.GetChild(i).gameObject;
+            ButtonItems button = child.GetComponent<ButtonItems>();
+
             if ((i - 1) < itemsToShow.Count)
             {
                 float auxIndex = itemsToShow.Count;
-                itemScroll.GetChild(i).gameObject.SetActive(true);
-                itemScroll.GetChild(i).GetComponentInChildren<TextMeshProUGUI>(true).text = itemsToShow[i - 1].name;
+                child.SetActive(true);
+                child.GetComponentInChildren<TextMeshProUGUI>(true).text = itemsToShow[i - 1].name;
                 auxIndex -= i;
-                itemScroll.GetChild(i).GetComponent<ButtonItems>().onClick.AddListener(() => SetScrollBarValue(stepSize * auxIndex));
-                itemScroll.GetChild(i).GetComponent<ButtonItems>().relatedItem = itemsToShow[i - 1];
+                button.onClick.AddListener(() => SetScrollBarValue(stepSize * auxIndex));
+                button.relatedItem = itemsToShow[i - 1];
             }
             else
             {
-                itemScroll.GetChild(i).gameObject.SetActive(false);
+                child.gameObject.SetActive(false);
             }
         }
     }
@@ -106,8 +109,8 @@ public class InventoryCanvas : MonoBehaviour
     }
 
     void UpdateMoneyAndWeight() {
-        moneyText.text = CharacterManager.inventory.TotalMoney.ToString();
-        weightText.text = CharacterManager.inventory.actualWeight.ToString() + "/" + CharacterManager.inventory.MaxWeight.ToString();
+        moneyText.text = CharacterManager.Instance.inventory.TotalMoney.ToString();
+        weightText.text = CharacterManager.Instance.inventory.actualWeight.ToString() + "/" + CharacterManager.Instance.inventory.MaxWeight.ToString();
     }
 
     void SetScrollBarValue(float value) {
